@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="task_szg_lwq_4pb">
+    <title>Installation of JIRA Server</title>
+    <titlealts>
+        <navtitle>Task perfomed by the System Admistrator</navtitle>
+        <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+        </searchtitle>
+    </titlealts>
+    <shortdesc>This section give the information how to install the JIRA server on your machine
+        configuration.</shortdesc>
+    <taskbody>
+        <context>
+            <p>Do the following steps to install the JIRA server on your machine configuration.</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>Use the following link to install the JIRA server to your machine
+                    configuration.</cmd>
+                <substeps id="substeps_g34_4kr_4pb">
+                    <substep>
+                        <cmd>For Windows Configuration, use the link.<xref
+                                href="https://confluence.atlassian.com/adminjiraserver/installing-jira-applications-on-windows-938846835.html"
+                                format="html" scope="local"/>
+                        </cmd>
+                    </substep>
+                    <substep>
+                        <cmd>For Linux Configuration, Use the link.<xref
+                                href="https://confluence.atlassian.com/adminjiraserver/installing-jira-applications-on-linux-938846841.html"
+                                format="html" scope="external"/></cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step>
+                <cmd>After the installtion of JIRA server, your JIRA must be accessible the
+                    following the links<xref
+                        href="http://&lt;computer_name_or_IP_address>:&lt;port>" format="html"
+                        scope="external"/>
+                    <xref href="http://172.20.152.18:8080" format="html" scope="external"/></cmd>
+            </step>
+            <step>
+                <cmd>Using the Administrator login, you can add the users and invite your team
+                    members. To create new user,do the following steps:</cmd>
+                <substeps id="substeps_pfh_dsr_4pb">
+                    <substep>
+                        <cmd>Go to- > <b>Setting</b>- > <b>User Management </b>-><b>Create New
+                                User</b>.</cmd>
+                    </substep>
+                    <substep>
+                        <note id="note_zdk_3w4_qpb">You can perform the steps without SMTP server
+                            also.</note>
+                        <cmd>You can create a new user with the required role.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+        </steps>
+    </taskbody>
+</task>

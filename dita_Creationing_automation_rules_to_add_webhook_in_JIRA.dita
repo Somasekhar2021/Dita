@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="task_b3w_fyx_4pb">
+    <title>Creating the automation rules to add webhook in JIRA</title>
+    <titlealts>
+        <navtitle>Task perfomed by the System Admistrator</navtitle>
+        <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+        </searchtitle>
+    </titlealts>
+    <shortdesc>This section describes how to create automation rules for webhook in between ICD and
+        JIRA.</shortdesc>
+    <taskbody>
+        <context>
+            <p>Webhook is basically used to communicate the ICD on any event in issue in the JIRA.
+                    <note id="note_v1h_psy_4pb">If the user has updated the issue summary in JIRA,
+                    by configuring the webhook you gets trigger the external system and process the
+                    information.</note></p>
+        </context>
+        <steps>
+            <step>
+                <cmd>Go to Settings-> System -> Automation Rules to create a rule for webhook.</cmd>
+            </step>
+            <step>
+                <cmd>Click on create rule to add a new webhook. You can  use the following link to
+                    create a rule and send the data in your webhook request.<xref
+                        href="https://www.atlassian.com/software/jira/guides/expand-jira/automation"
+                        format="html" scope="external"/></cmd>
+            </step>
+            <step>
+                <cmd>You can create the rules to communicate between the ICD and JIRA.  Following
+                    steps are the sample examples of  webhook rules. </cmd>
+                <substeps id="substeps_ljr_s4y_4pb">
+                    <substep>
+                        <cmd>Create the ICD worklog to automation rule that invoke, when the JIRA
+                            defect is created.</cmd>
+                    </substep>
+                    <substep>
+                        <cmd>Update ICD request to automation rule that invoke, when the customer
+                            commented to reopen the service project request again.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step>
+                <cmd>You can validate your webhook end point by providing the issue id, then use
+                    validate button and ensure that the audit logs for the response.</cmd>
+            </step>
+            <step>
+                <cmd>Full issue details to be sent with the request to capture and save all the
+                    details changes back in ICD, then publish your rule.</cmd>
+            </step>
+            <step>
+                <cmd>Import the following JIRA Automation Rules command to create the work logs from
+                    JIRA to ICD.</cmd>
+                <info>
+                    <codeblock id="codeblock_cxb_bz2_ppb">{"rules":[{"id":1,"clientKey":"com.codebarrel.tenant.global",
+"name":"Create ICD Work Log","state":"ENABLED","canOtherRuleTrigger":false,"notifyOnError":"FIRSTERROR",
+"authorAccountId":"arun.shrangarya","actorAccountId":"arun.shrangarya","created":1616657219235,
+"updated":1616751501494,"trigger":{"id":"63","component":"TRIGGER","schemaVersion":1,
+"type":"jira.issue.event.trigger:commented","value":{"synchronous":true,
+"eventKey":"jira:issue_updated","issueEvent":"issue_commented"},
+"children":[],"conditions":[],"optimisedIds":[],"newComponent":false},
+"components":[{"id":"64","component":"ACTION","schemaVersion":1,"type":"jira.issue.outgoing.webhook",
+"value":{"url":"http://172.20.152.176:9080/maximo/oslc/os/CDUIWORKLOG?_lid=maxadmin&amp;_lpwd=Aricent@123",
+"headers":[{"id":"_header_1616404244791","name":"","value":""}],"sendIssue":false,"contentType":"custom",
+"customBody":"{\n    \"spi:class\": \"INCIDENT\",\n    \"spi:description\": \"{{issue.comments.last.body}}\",
+\n    \"spi:logtype\": \"CLIENTNOTE\",\n    \"spi:modifyby\": \"MAXADMIN\",\n    \"spi:logtype_description\": \"Client Note\",
+\n    \"spi:clientviewable\": false,\n    \"spi:createby\": \"MAXADMIN\",
+\n    \"spi:recordkey\": \"{{issue.fields.customfield_10201}}\"\n}",
+"method":"POST","responseEnabled":false},"children":[],"conditions":[],"optimisedIds":[],"newComponent":false}],
+"projects":[{"projectId":"10301","projectTypeKey":"service_desk"}],"labels":[],"tags":[]},{"id":2,
+"clientKey":"com.codebarrel.tenant.global","name":"Update ICD Incident","state":"ENABLED",
+"canOtherRuleTrigger":false,"notifyOnError":"NEVER","authorAccountId":"arun.shrangarya",
+"actorAccountId":"arun.shrangarya","created":1616657219236,"updated":1616664918862,
+"trigger":{"id":"15","component":"TRIGGER","schemaVersion":2,"type":"jira.issue.field.changed",
+"value":{"synchronous":true,"fields":[{"value":"summary","type":"field"},{"value":"priority",
+"type":"field"},{"value":"status","type":"field"}],"actions":["edit","transition"]},"children":[],
+"conditions":[],"optimisedIds":[],"newComponent":false},"components":[{"id":"16","component":"ACTION",
+"schemaVersion":1,"type":"jira.issue.outgoing.webhook",
+"value":{"url":"http://172.20.152.176:9080/maximo/oslc/script/UPDATEINCIDENT?_lid=maxadmin&amp;_lpwd=Aricent@123",
+"headers":[{"id":"_header_1613642326770","name":"Content-Type","value":"application/json"}],
+"sendIssue":false,"contentType":"issue","customBody":"{\n\"summary\":\"test\"\n}",
+"method":"POST","responseEnabled":false},"children":[],"conditions":[],"optimisedIds":[],
+"newComponent":false}],"projects":[{"projectId":"10301","projectTypeKey":"service_desk"}],
+"labels":[],"tags":[]}],"cloud":false}</codeblock>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task>

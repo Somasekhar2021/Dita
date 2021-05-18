@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="task_abw_yld_ppb" xml:lang="en-US">
+    <title>Adding JIRA endpoints in ICD</title>
+    <titlealts>
+        <navtitle>Task perfomed by the System Admistrator</navtitle>
+        <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+        </searchtitle>
+    </titlealts>
+    <shortdesc>This section gives the information about JIRA endpoints in the ICD </shortdesc>
+    <taskbody>
+        <context>
+            <p>You create an endpoint to identify a target location and the transport mechanism that
+                the integration framework, or deployment manager uses to publish data, or to invoke
+                a service.</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>In the End Points application, click <b>New End Point</b>.</cmd>
+            </step>
+            <step>
+                <cmd>To create end point in the JIRA configuration, you need to provide the
+                    following details.</cmd>
+                <substeps id="substeps_ykl_csd_ppb">
+                    <substep>
+                        <cmd>End point name</cmd>
+                    </substep>
+                    <substep>
+                        <cmd>Username (JIRA Username)</cmd>
+                    </substep>
+                    <substep>
+                        <cmd>URL (JIRA Server URL)</cmd>
+                    </substep>
+                    <substep>
+                        <cmd>Password (API Authentication token)</cmd>
+                    </substep>
+                    <substep>
+                        <cmd>Handler (HTTP).</cmd>
+                    </substep>
+                </substeps>
+            </step>
+        </steps>
+    </taskbody>
+</task>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="task_lvg_whg_ppb" xml:lang="en-US">
+    <title><b><ph id="_Toc69208418">Execution with MAXADMIN</ph></b></title>
+    <shortdesc/>
+    <taskbody>
+        <context>
+            <p/>
+        </context>
+        <steps>
+            <step>
+                <cmd>Create the new incident with the <b>New Incident option</b> with summary and
+                    the necessary details, then click <b>Submit Now</b> button in ICD.</cmd>
+            </step>
+            <step>
+                <cmd>The incident will be created with incident ID. </cmd>
+            </step>
+            <step>
+                <cmd>To map the ICD ticket with JIRA ticket, you need to create defect in JIRA by
+                    checking the checkbox and select the JIRA service URL.</cmd>
+            </step>
+            <step>
+                <cmd>Ensure that the newly created incident in ICD must be reflected in JIRA with
+                    the same<b> ICDTICKETID</b> field.</cmd>
+            </step>
+            <step>
+                <cmd>You can change the details of the defect in JIRA, then select the <b>Start
+                        Progress</b> option and add the comment (worklog).</cmd>
+            </step>
+            <step>
+                <cmd>Updates made for ticket ID through JIRA will be reflected in ICD.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_nvy_bmj_4pb" xml:lang="en-US">
+    <title>Configuration overview</title>
+    <titlealts>
+        <navtitle>Task perfomed by the System Admistrator</navtitle>
+        <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+        </searchtitle>
+    </titlealts>
+    <shortdesc>This section gives the detailed overview on configuring JIRA integration in IBM ICD. </shortdesc>
+    <conbody>
+        <p>IBM ICD is a highly configurable product. With minimal technical skills, users can add
+            new fields, make screen changes, or restrict values of attributes in ICD.</p>
+        <div>
+            <p>Use the following ICD solution blocks to integrate the ICD with JIRA:<ol
+                    id="ol_nq5_frj_4pb">
+                    <li>
+                        <div><b>Automation Scripts:</b></div>
+                        <p>Automation scripts are small, targeted pieces of code that can extend the
+                            product. With the <b>Automation Scripts</b> application, you can create
+                            scripts to automate tasks based on the events, or attributes of a
+                            business object or based on actions or custom conditions.</p>
+                        <p>The biggest advantage in automation scripting is the deployment process.
+                            Unlike Java customization that can take hours to deploy if you’re
+                            clustered, which makes developing and testing take substantially longer,
+                            Automation Scripts can be added, modified, or disabled without any
+                            downtime. That alone makes it hard to beat for most organizations.</p>
+                        <p>To run the automation script, specify the following components</p>
+                        <ul id="ul_a3p_bdk_4pb">
+                            <li><div><b>A launch point</b></div>A launch point defines the execution
+                                context for an automation script, for example when a business object
+                                is updated, or a value is entered into a field. Some types of launch
+                                point are supported, and the Automation Scripts application provides
+                                a separate wizard application for creating each type of launch
+                                point. </li>
+                            <li><div><b>Variables and corresponding binding values</b></div>You can
+                                specify the variables that determine how information is passed into
+                                or received from an automation script in the wizard applications.
+                                Variables are not mandatory, but when you use variables it
+                                simplifies the amount of code that is written and makes it easier to
+                                reuse the code.</li>
+                            <li><div><b>Source code</b></div>You can write source code in an
+                                external application and import it into the <b>Automation
+                                    Scripts</b> application. </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div><b>Endpoint Configuration:</b></div>
+                        <p>An endpoint and its associated handler routes outbound messages to an
+                            external system. The combination of an endpoint and handler specifies
+                            the transport protocol to use, such as HTTP or web service, and provides
+                            the communication data required to reach the destination, such as a
+                            URL.</p>
+                        <p>Create an endpoint to identify the target location and the transport
+                            mechanism that the integration framework, or deployment manager uses to
+                            publish data, or to invoke a service.</p>
+                        <p>Add a handler to an endpoint record to specify how to route outbound data
+                            to a specific endpoint location. You can also add a handler to define
+                            the data format that is used in the data transfers.</p>
+                        <p> HTTP Handler is used by providing the metadata information for JIRA
+                            Integration.</p>
+                    </li>
+                    <li>
+                        <div><b>Application Designer:</b></div>
+                        <p>The Application Designer tool helps the user to create the XML for each
+                            application, without touching the XML.</p>
+                        <p>Applications in IBM ICD are stored as an XML document in the database.
+                            This XML is then rendered by Maximo to show the different applications
+                            that are available. A palette with all the available elements is
+                            available and to add the elements to the application it is just drag and
+                            drop to the desired place. Apart from the application itself, one can
+                            also choose to edit the dialogues related to the application, signature
+                            options, toolbars and select action menu.</p>
+                        <p>The Control Palette in the designer has the whole list of elements which
+                            can be added to any application. The application will be split in
+                            sections, and then, in the sections one can add Tables, text boxes,
+                            buttons, Images, Hyperlinks, and other elements. After adding the
+                            elements, themselves, one will also need to change the properties of
+                            each element.</p>
+                    </li>
+                    <li>
+                        <div><b>Database configuration:</b></div>
+                        <p>Use the database configuration application to create or change objects
+                            and attributes, and customize the database. An object is a
+                            self-contained software entity that consists of both data and functions
+                            to manipulate data. Most applications are associated with one main
+                            object and other related objects.</p>
+                        <p>When you use the Database configuration application, interact at the
+                            business object level. Internally, the application determines the
+                            actions to take on the database tables to support the needs of business
+                            objects.</p>
+                        <p>You can add MBOs and the attributes to the existing MBOs. Attributes can
+                            also be Non-Persistent, even if the parent MBO is itself persistent. In
+                            the Attribute section, one would set the type of the attribute, default
+                            value, class, domain and many more features.</p>
+                        <p>Although domains are a separate application, they are also used with
+                            attributes. Setting domains to attributes will help you show and
+                            validate the attribute data against a specific set of data. From the
+                            database configuration, you can also set default values to attributes,
+                            set auto-numbering and set if an attribute is required or not.</p>
+                    </li>
+                </ol></p>
+        </div>
+    </conbody>
+</concept>

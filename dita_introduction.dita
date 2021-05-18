@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_mxj_x2j_4pb" xml:lang="en-US">
+    <title>Introduction</title>
+    <titlealts>
+        <navtitle>Task perfomed by the System Admistrator</navtitle>
+        <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+        </searchtitle>
+    </titlealts>
+    <shortdesc>This section contains information about the JIRA intregration with IBM Control
+        Desk.</shortdesc>
+    <conbody>
+        <p>ICD is used to provide users ability to raise tickets for IT services and including the
+            issues on Software.</p>
+        <p>In-house Software teams, uses the JIRA to manage Issues/Projects. In general  Atlassian
+            suite is used  for Coding/Collaboration.</p>
+        <p>Using ICD capability, JIRA is integrated to manage projects and issues.</p>
+        <p/>
+        <p>Once the integration with JIRA is completed, you will able to perform the below
+            actions:</p>
+        <ol id="ol_hmf_r3j_4pb">
+            <li><div><b>Create issues in Jira:</b></div>Incidents reported by a user on ICD need to
+                be forwarded to JIRA as an issue to be solved by the Software team.</li>
+            <li><div><b>Update in Issue:</b></div> The status of the issue from JIRA needs to be
+                reflected in the incident ticket. Also, update in description, priority of the issue
+                will be reflected in ICD incident.</li>
+            <li><div><b>Worklog update:</b></div>Any update in the comment in JIRA defect, will be
+                updated as a worklog in ICD incident.</li>
+        </ol>
+    </conbody>
+</concept>

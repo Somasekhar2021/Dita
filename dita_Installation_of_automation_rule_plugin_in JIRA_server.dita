@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="task_zw5_vnx_4pb" xml:lang="en-US">
+    <title>Installation of Automation Rule plugin in JIRA</title>
+    <titlealts>
+        <navtitle>Task perfomed by the System Admistrator</navtitle>
+        <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+        </searchtitle>
+    </titlealts>
+    <shortdesc>This section contains the information about the installation of automation rule
+        plugin in JIRA.</shortdesc>
+    <taskbody>
+        <context>
+            <p>Automation rules are used to perform actions in your service project based on
+                specific triggers and conditions. </p>
+            <p>Do the following steps to install the automation rule plugin in JIRA server.</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>Go to settings on the the top right corner in the menu bar, then select the
+                    manage apps. </cmd>
+            </step>
+            <step>
+                <cmd>Search for Automation Rules in the market place.</cmd>
+            </step>
+            <step>
+                <cmd>Install the automation rule plugin, You can create the rules to communicate
+                    between the ICD and JIRA.</cmd>
+                <substeps id="substeps_vsb_vry_4pb">
+                    <substep>
+                        <cmd>You can set an automation rule that alerts an agent when a high
+                            priority issue is created or when the customer comment to reopen the
+                            service project request again.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+        </steps>
+    </taskbody>
+</task>

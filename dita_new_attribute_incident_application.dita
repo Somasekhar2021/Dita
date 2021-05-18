@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ukd_ds2_ppb" xml:lang="en-US">
+    <title>Adding new attribute incident application</title>
+    <titlealts>
+        <navtitle>Task perfomed by the System Admistrator</navtitle>
+        <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+        </searchtitle>
+    </titlealts>
+    <shortdesc/>
+    <conbody>
+        <p>In the database configuration application, you need to create two new attributes in the
+            incident application. The two new attributes are created in the incident application are
+            as follows:</p>
+        <ol id="ol_z2b_ps2_ppb">
+            <li>In the incident application, select <b>Incident</b> and <b>Attributes</b> tab.
+                Search for object incident and JIRA endpoint, you can see the following attributes
+                in the section.<ol id="ol_j1q_kt2_ppb">
+                    <li><b>CREATEJIRATICKET</b>: Create JIRA ticket attribute is a check box</li>
+                    <li><b>JIRAENDPOINT</b>: JIRA endpoint is a drop down</li>
+                </ol></li>
+            <li>Use <b>Application Designer</b> to ensure the fields and the attributes are
+                correct.</li>
+        </ol>
+    </conbody>
+</concept>

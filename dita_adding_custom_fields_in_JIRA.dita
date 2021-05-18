@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="task_qnk_ldz_4pb" xml:lang="en-US">
+    <title><ph id="_Toc69208411">Adding custom fields in JIRA</ph></title>
+    <titlealts>
+        <navtitle>Task perfomed by the System Admistrator</navtitle>
+        <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+        </searchtitle>
+    </titlealts>
+    <shortdesc/>
+    <taskbody>
+        <context/>
+        <steps>
+            <step>
+                <cmd>To create a custom field, go to settings-> issues -> Fields category - > custom
+                    field</cmd>
+            </step>
+            <step>
+                <note id="note_gx3_2q1_ppb">Here the field type used as a text box (Single line).
+                    You can customerize the field according to the requirment.</note>
+                <cmd>From the top right corner, click on create custom field. You can choose field
+                    type according to the text input.</cmd>
+            </step>
+            <step>
+                <cmd>To configure the custom field fill the details in text field with the name and
+                    description, then click on create button.</cmd>
+            </step>
+            <step>
+                <cmd>Ensure that the new custom field has been created.</cmd>
+            </step>
+            <step>
+                <cmd>To enable the custom field and your project, you need to select project screen
+                    share to see in the created project. <b>You can find screen option in the
+                        setting icon, which is next to new custom field.</b></cmd>
+            </step>
+            <step>
+                <cmd> Select the checkbox to enable the screen, which field you want to displayed
+                    and to update.</cmd>
+            </step>
+            <step>
+                <cmd>Copy the webpage URL to access the custom field.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+    <task id="task_hy4_cbf_ppb">
+        <title><b><ph id="_Toc69208412">Map JIRA ticket status to align with ICD</ph></b></title>
+        <titlealts>
+            <navtitle>Task perfomed by the System Admistrator</navtitle>
+            <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+            </searchtitle>
+        </titlealts>
+        <taskbody>
+            <context id="context_rzn_mbf_ppb">Use the following command to map and align the JIRA
+                ticket status with ICD.<codeblock id="codeblock_csg_pbf_ppb">
+{
+"Done":"CLOSED",
+"Pending":"QUEUED",
+"Work in progress":"INPROG",
+"Open":"NEW"
+}</codeblock></context>
+        </taskbody>
+    </task>
+</task>

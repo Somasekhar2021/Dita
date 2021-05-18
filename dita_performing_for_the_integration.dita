@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="task_prz_jhp_4pb">
+    <title><b>Performing the JIRA Integration</b></title>
+    <titlealts>
+        <navtitle>Performing the JIRA Integration</navtitle>
+        <searchtitle>Performing the JIRA Integration</searchtitle>
+    </titlealts>
+    <shortdesc>This section describe the steps to performing the JIRA Integration.</shortdesc>
+    <taskbody>
+        <context>
+            <p><b>The building blocks of ICD supported JIRA Integration with ICD without doing in
+                    any Java level code changes (Ref. <xref href="dita_configuration_overview.dita"
+                    />) . After making these changes in the configuration, no need to re-deploy ICD.
+                    You do not required any downtime to achieve the goal.</b></p>
+            <p>Do the following steps to perform the JIRA integration in ICD:</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>JIRA must be configured with the API Token for authentication (Ref. <xref
+                        href="dita_generating_the_Authentication_token_in_JIRA.dita"/> ).</cmd>
+            </step>
+            <step>
+                <cmd>Enable the automation rules plugin in the webhook configuration. Automation
+                    rule plugin is necessary for two-way communication with the ICD. When there is
+                    an update in JIRA ticket, the details of the ticket is immediately updated in
+                    ICD. Rules must be imported with the required JSON (Ref. <xref
+                        href="dita_Creationing_automation_rules_to_add_webhook_in_JIRA.dita"
+                    />).</cmd>
+            </step>
+            <step>
+                <cmd>It is necessary to configure in JIRA with the custom fields for two-way mapping
+                    with ICD.</cmd>
+            </step>
+            <step>
+                <cmd>JIRA Endpoints must be added in Endpoints application.</cmd>
+            </step>
+            <step>
+                <cmd>Add a new Domain for Endpoints in ICD for multiple JIRA instances.</cmd>
+            </step>
+            <step>
+                <cmd>In database configuration, two new attributes are added in ICD. These
+                    attributes are named as <b>Create JIRA ticket</b> (Checkbox whether user wants
+                    to create ticket in JIRA) and <b>JIRA Endpoint</b> (JIRA Server URL).</cmd>
+            </step>
+            <step>
+                <cmd>Use Application Designer to customize the new attributes in the incident
+                    application.</cmd>
+            </step>
+            <step>
+                <cmd>JIRA workflow must be mapped to the ICD workflow, and different fields like
+                    priority, status, and description is mapped according to the JIRA fields.</cmd>
+            </step>
+            <step>
+                <cmd>Automation Scripts must be added with proper launch points.</cmd>
+            </step>
+            <step>
+                <cmd><b>There was jar conflict for httpcore jar in TPAE folder as it had 2 versions
+                        of the same jar and our automation script was giving ClassNotFoundException.
+                        As temporary fix we have removed the “httpcore-4.2.4” and using the latest
+                        one “httpcore-4.4.4”in TPAE lib folder.</b></cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task>

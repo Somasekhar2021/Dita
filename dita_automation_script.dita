@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_zvx_dqf_ppb" xml:lang="en-US">
+    <title>Automation script</title>
+    <shortdesc/>
+    <conbody>
+        <p>Automation Script is the back bone of ICD and JIRA integration. An automation script
+            consists of a launch point, variables with corresponding binding values, and the source
+            code. You use wizards to create the components of an automation script. You create
+            scripts and launch points or you create a launch point and associate the launch point
+            with an existing script.</p>
+        <p>You need to create two automation scripts in the integration are as follows:<ol
+                id="ol_v3z_hsf_ppb">
+                <li>To create a jira issue whenever any ICD incident is raised based on input
+                    provided. </li>
+                <li>To update the ICD incident whenever any jira issue is updated.</li>
+            </ol></p>
+    </conbody>
+    <concept id="concept_h24_nsf_ppb">
+        <title><b>Create an automation script to JIRA tickets</b></title>
+        <conbody>
+            <p>In the Find Navigation item search and select the <b>Automation Script</b>. Do the
+                following steps to create automation script to JIRA tickets.</p>
+            <ol id="ol_lhx_stf_ppb">
+                <li>Go to Automation scripit application→ More Actions→Create→Script with Object
+                    Launch Point.</li>
+                <li>Provide the Launch Point name as <b>INCIDENTTEST</b>, object as <b>INCIDENT</b>
+                    and object event condition as createjiraticket = 1 (checked ) and
+                        jiraendpoint!="<note id="note_unl_zzf_ppb">The launch point condition is
+                        JIRA ticket has to be checked save and jiraendpoint has to be checked after
+                        save.</note></li>
+                <li>Select the script name as <b>jython</b>, select it as active and log level as
+                    debug to get debugging logs. Use the following scripit for debugging
+                    logs.<codeblock id="codeblock_srf_bbg_ppb"># Copyright (C) Altran ACT S.A.S. 2021. All rights reserved
+# This script is used to create defect in jira whenever an incident is created from ICD.
+
+from com.ibm.json.java import JSONObject
+
+from java.io import BufferedReader, IOException, InputStreamReader
+from java.lang import System, Class, String, StringBuffer
+from java.nio.charset import Charset
+from java.util import Date, Properties, List, ArrayList
+
+from org.apache.commons.codec.binary import Base64
+from org.apache.http import HttpEntity, HttpHeaders, HttpResponse, HttpVersion
+from org.apache.http.client import ClientProtocolException, HttpClient
+from org.apache.http.client.entity import UrlEncodedFormEntity
+from org.apache.http.client.methods import HttpPost
+from org.apache.http.client.methods import HttpGet
+from org.apache.http.entity import StringEntity
+from org.apache.http.impl.client import DefaultHttpClient
+from org.apache.http.message importon BasicNameValuePair
+from org.apache.http.params import BasicHttpParams, HttpParams, HttpProtocolParamBean
+
+from psdi.mbo import Mbo, MboRemote, MboSet, MboSetRemote
+from psdi.security import UserInfo
+from psdi.server import MXServer
+from psdi.mbo import SqlFormat
+from psdi.iface.router import Router
+from psdi.iface.mic import EndPointCache
+from psdi.iface.router import HTTPHandler
+from java.util import HashMap
+
+from sys import *
+
+def getIncidentData():
+    description = mbo.getString("DESCRIPTION")
+    return mbo;
+    
+def getJIRAPriority(reported_priority):
+    priority = "3"
+    # read mapping file
+    with open('C:\Users\Administrator\Documents\priority_mapping.json', 'r') as myfile:
+        data=myfile.read()
+    
+    # converting string to json
+    final_dictionary = eval(data)
+    for key, value in final_dictionary.items():
+        if (str)(key) == reported_priority:
+            priority = (str)(value)
+    
+    return priority;
+
+# method for creating the JSON string which is sent in http POST body
+def createJSONstring():
+    jsonStr = ""
+    project = JSONObject()
+    project.put("key", "IJI")
+    
+    issuetype = JSONObject()
+    issuetype.put("name", "Task")
+    
+    reported_priority = mbo.getString("REPORTEDPRIORITY")
+    priority = JSONObject()
+    priority.put("id", getJIRAPriority(reported_priority))
+    
+    obj = JSONObject()
+    obj.put("summary", mbo.getString("DESCRIPTION"))
+    obj.put("project", project)
+    obj.put("issuetype", issuetype)
+    obj.put("priority", priority)
+    obj.put("customfield_10200", mbo.getString("TICKETUID"))
+    obj.put("customfield_10201", mbo.getString("TICKETID"))
+    
+    create_jira_ticket = mbo.getBoolean("CREATEJIRATICKET")
+    
+    fields = JSONObject()
+    fields.put("fields", obj)
+    jsonStr = fields.serialize(True)
+    return jsonStr
+
+# method for http POST using the path, JSON body and token with bearer authorization
+def httpPost(url,username,password, jsonstring):
+    reference = None
+    path = "/rest/api/2/issue"
+    uri = url + path
+    
+    # get authentication header
+    auth = username + ":" + password
+    encodedAuth = String(Base64.encodeBase64(String.getBytes(auth, 'ISO-8859-1')),"UTF-8")
+    authHeader = "Basic " + str(encodedAuth)
+    
+    # get http parameters
+    params = BasicHttpParams()
+    paramsBean = HttpProtocolParamBean(params)
+    
+    # get http body entities
+    entity = StringEntity(jsonstring)
+
+    # get client, http headers and request
+    client = DefaultHttpClient()
+    request = HttpPost(uri)
+    request.setParams(params)
+    request.addHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+    request.addHeader('Authorization', authHeader)
+    request.setEntity(entity)
+    
+    # get client response
+    response = client.execute(request)
+    # return JSON response and reference number
+    status = response.getStatusLine().getStatusCode()
+    
+    return 'success'
+
+# method for creating Maximo company record as a current account in Logo 
+def createJIRATicket():
+    
+    jira_end_point = mbo.getString("JIRAENDPOINT")
+    
+    # get Endpoint/Handler. If not specified - use the default RBA_REST endpoint name
+    print "using end point: ", jira_end_point
+
+    handler = Router.getHandler(jira_end_point)
+
+    print "credentials being used: ", jira_end_point
+    # get the username, password and url from the endpoint mbo
+    username = handler.getUserName();
+    print "username = ", username
+
+    endPointInfo = EndPointCache.getInstance().getEndPointInfo(jira_end_point)
+    password  = endPointInfo.getProperty("PASSWORD").getValue()
+
+    url = handler.getUrl()
+    print "url =", url
+    
+    jsonstr = createJSONstring()
+    try:
+        reference = httpPost(url,username,password, jsonstr)
+    except:
+        System.out.println( 'Error:' + str(exc_info()[0]) + str(exc_info()[1]))
+    finally:
+        System.out.println( 'finally - all connections closed')
+
+# Main part
+createJIRATicket()
+</codeblock></li>
+            </ol>
+            <p>Similarly create an automation script to update incident for webhook support from
+                jira. Use the below text file for reference. </p>
+        </conbody>
+    </concept>
+    <concept id="concept_skw_mdg_ppb">
+        <title><b><ph id="_Toc69208417">Create an automation script to update
+            incident</ph></b></title>
+        <conbody>
+            <ol id="ol_cxn_4fg_ppb">
+                <li>Use the following script to create the automation script to update the incident
+                    for webhook support from
+                    jira.<codeblock id="codeblock_cwv_vfg_ppb"># Copyright (C) Altran ACT S.A.S. 2021. All rights reserved
+# This script is used to update icd incident when an update is being triggered from jira.
+
+from java.util import Calendar
+from org.python.core import PyTuple
+
+#from org.json import JSONObject
+
+from java.io import BufferedReader, IOException, InputStreamReader, BufferedInputStream
+from java.lang import System, Class, String, StringBuffer, Integer
+from java.nio.charset import Charset
+from java.util import Date, Properties, List, ArrayList
+
+from org.apache.commons.codec.binary import Base64
+from org.apache.http import HttpEntity, HttpHeaders, HttpResponse, HttpVersion
+from org.apache.http.client import ClientProtocolException, HttpClient
+from org.apache.http.client.entity import UrlEncodedFormEntity
+from org.apache.http.client.methods import HttpGet
+from org.apache.http.entity import StringEntity
+from org.apache.http.util import EntityUtils
+from org.apache.http.impl.client import DefaultHttpClient
+from org.apache.http.message import BasicNameValuePair
+from org.apache.http.params import BasicHttpParams, HttpParams, HttpProtocolParamBean
+
+from com.google.gson import JsonObject, JsonParser, JsonElement
+
+from psdi.mbo import Mbo, MboRemote, MboSet, MboSetRemote
+from psdi.security import UserInfo
+from psdi.server import MXServer
+from psdi.mbo import SqlFormat
+from psdi.mbo import MboConstants
+from sys import *
+
+def getICDStatus(jira_status):
+    status = ""
+    # read mapping file
+    with open('C:\Users\Administrator\Documents\status_mapping.json', 'r') as myfile:
+        data=myfile.read()
+    
+    # converting string to json
+    final_dictionary = eval(data)
+    
+    status = final_dictionary.get(jira_status)
+    return status;
+    
+def getICDPriority(jira_priority):
+    priority = ""
+    # read mapping file
+    with open('C:\Users\Administrator\Documents\priority_mapping.json', 'r') as myfile:
+        data=myfile.read()
+    
+    # converting string to json
+    final_dictionary = eval(data)
+    
+    # converting string to json
+    final_dictionary = eval(data)
+    for key, value in final_dictionary.items():
+        if jira_priority == value :
+            return key;
+            
+    return priority;
+
+def getJsonValue(val):
+    
+    if val.isJsonPrimitive():
+        p = val.getAsJsonPrimitive()
+        if p.isString():
+            return p.getAsString()
+        if p.isBoolean():
+            return p.getAsBoolean()
+        if p.isNumber():
+            return p.getAsNumber().intValue()
+    else:
+        return
+    
+def invokeUpdateMbo():
+    #Set the json answer as body type
+    responseHeaders.put("content-type","application/json")
+        
+    #convert request body to json object
+    jsonElement = JsonElement
+    jsonObject = JsonObject
+    try:
+        jsonElement = JsonParser().parse(requestBody)
+        jsonObject = jsonElement.getAsJsonObject()
+    except:
+	    System.out.println('error while parsing json')
+	    
+    # ticket uid 
+    ticketuid = jsonObject.get('fields').get('customfield_10200')
+    
+    # read mapping file
+    with open('C:\Users\Administrator\Documents\incident_icd_jira_mapping.json', 'r') as myfile:
+        data=myfile.read()
+    
+    # converting string to json
+    final_dictionary = eval(data)
+    
+    #get incident mbo
+    ticketSet = MXServer.getMXServer().getMboSet("TICKET", request.getUserInfo());
+    format = SqlFormat("ticketuid=:1");
+    
+    format.setObject(1, "TICKET", "ticketuid", getJsonValue(ticketuid));
+    ticketSet.setWhere(format.format());
+    ticketSet.reset();
+    
+    incidentMbo = ticketSet.getMbo(0);
+    
+    #iterate json object
+    jsonObject1 = jsonObject
+    for key, value in final_dictionary.items():
+        
+        temp = value
+        arr = temp.split(".")
+        val = ""
+        length = len(arr)
+        for i in arr:
+            if length == 1:
+                val = jsonObject.get(i)
+            
+            else :
+                tempjson = jsonObject.get(i)    
+                jsonObject = tempjson
+            
+            length = length -1
+        
+        jsonObject = jsonObject1
+        incidentMbo.setValue(key, getJsonValue(val), MboConstants.NOACCESSCHECK | MboConstants.NOVALIDATION_AND_NOACTION)
+        
+    jira_status = jsonObject.get('fields').get('status').get('name')
+    icd_status = getICDStatus(getJsonValue(jira_status))
+    
+    if icd_status == '':
+        System.out.println( 'icd_status is empty')
+    else :    
+        incidentMbo.setValue('STATUS',icd_status,MboConstants.NOACCESSCHECK | MboConstants.NOVALIDATION_AND_NOACTION)
+    
+    jira_priority = jsonObject.get('fields').get('priority').get('id')
+    icd_priority = getICDPriority(getJsonValue(jira_priority))
+    incidentMbo.setValue('REPORTEDPRIORITY',icd_priority,MboConstants.NOACCESSCHECK | MboConstants.NOVALIDATION_AND_NOACTION)
+    
+    #save incident mbo
+    incidentMbo.getThisMboSet().save();
+
+# Main part
+invokeUpdateMbo()
+</codeblock></li>
+                <li>Use your JIRA username as username and API token as password for basic
+                    authentication.</li>
+                <li>Use your JIRA server IP port as your JIRAURL<xref
+                        href="http://172.20.150.55:8080/rest/api/2/issue" format="html"
+                        scope="external"/>.</li>
+            </ol>
+        </conbody>
+    </concept>
+</concept>

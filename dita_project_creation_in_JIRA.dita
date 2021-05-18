@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="task_pbz_z5r_4pb" xml:lang="en-US">
+    <title><b>Project creation in JIRA</b></title>
+    <titlealts>
+        <navtitle>Task perfomed by the System Admistrator</navtitle>
+        <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+        </searchtitle>
+    </titlealts>
+    <shortdesc>This section contains the details of JIRA project creation. </shortdesc>
+    <taskbody>
+        <context>
+            <p>Do the following steps to create the projects in JIRA:</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>Use the <b>Create Project </b>option to create the project</cmd>
+            </step>
+            <step>
+                <cmd>After clicking the create project option a new window prompts you to provide
+                    basic information about the project, then click submit.</cmd>
+            </step>
+            <step>
+                <cmd>Store the ICD tickets in the project that you have created.</cmd>
+            </step>
+            <step>
+                <cmd>ICD tickets are stored as a links, Click on the links to direct the Incidents
+                    applications in ICD to JIRA defects.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task>

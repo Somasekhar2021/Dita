@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="task_bcq_sbx_4pb">
+    <title><b><ph id="_Toc69208408">Generating the Authentication token in JIRA </ph></b></title>
+    <titlealts>
+        <navtitle>Task perfomed by the System Admistrator</navtitle>
+        <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+        </searchtitle>
+    </titlealts>
+    <shortdesc>This topic gives the information about how to generate API Token in JIRA.</shortdesc>
+    <taskbody>
+        <context>
+            <p>To create the API auth token in JIRA, do the following steps:</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>API Token is used to integrate JIRA with the external system (ICD).</cmd>
+            </step>
+            <step>
+                <cmd>Click on Profile icon on the top right corner in the menu bar, then select the
+                    API token Authentication option. </cmd>
+            </step>
+            <step>
+                <cmd>Create new tokens for your connections by clicking on the New API Token
+                    button.</cmd>
+            </step>
+            <step>
+                <cmd>A message box prompts you to provide the information about  description,
+                    expiration and scope of the token, then click on API token.</cmd>
+            </step>
+            <step>
+                <cmd>Keep a copy of the token with you.  API Tokens can be used to authenticate to
+                    the JIRA instead of  your user password in ICD. </cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="task_bwg_gg2_ppb" xml:lang="en-US">
+    <title>Adding Domain in ICD</title>
+    <titlealts>
+        <navtitle>Task perfomed by the System Admistrator</navtitle>
+        <searchtitle>Task performed to enable Remote Diagnostics support using VNC server.
+        </searchtitle>
+    </titlealts>
+    <shortdesc>This section gives the information how to add the domain configuration in
+        ICD.</shortdesc>
+    <taskbody>
+        <context>
+            <p>Domains define the values that are allowed in the fields. They can be available in
+                lookup list dialog boxes that are also referred to as Select Value lists. Domains
+                also define the values that can be typed directly in a field. Domains helps to
+                ensure that valid and consistent data is entered and reported on. Domains are used
+                throughout the product.</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>In the End Points application, click <b>Domain</b> option.</cmd>
+            </step>
+            <step>
+                <cmd>Create the domain to configure the JIRA Endpoint in the domain application,
+                    then go to domain application</cmd>
+            </step>
+            <step>
+                <cmd>Use <b>Add New Domain</b> option and select <b>Add New ALN Domain</b>.</cmd>
+            </step>
+            <step>
+                <cmd>A message box prompts you to provide the information about domain name, domain
+                    type and the length.</cmd>
+            </step>
+            <step>
+                <cmd>You can add JIRA value and the decsciption by using the <b>New Row</b>. You can
+                    view or modify the ALN domain values by using <b>View/Modify
+                    conditions</b></cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task>

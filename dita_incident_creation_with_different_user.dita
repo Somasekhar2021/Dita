@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="task_xgw_4j4_qpb">
+    <title><b><ph id="_Toc69208419">Incident creation with different user</ph></b></title>
+    <shortdesc>This section gives the information on how to create new incident for another user in
+        ICD and JIRA intregration.</shortdesc>
+    <taskbody>
+        <context>
+            <p>Use the following steps to create incident with diferent users</p>
+        </context>
+        <steps>
+            <step>
+                <cmd>Go to IBM control desk, then login with existing user ID and password. </cmd>
+            </step>
+            <step>
+                <cmd>Select the JIRA user in the users section, then click on incidents
+                    option.</cmd>
+            </step>
+            <step>
+                <cmd>Provide the user information for new user by giving   <b>Reporting By</b> and
+                        <b>Affected By</b>, then create the incident (<b>Ref. Create incident XML
+                        Reference</b>).</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task>
